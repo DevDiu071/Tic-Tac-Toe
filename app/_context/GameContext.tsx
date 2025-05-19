@@ -1,7 +1,14 @@
 "use client";
 
-import { createContext, ReactNode, useContext, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { GameContextType } from "../_types/gameTypes";
+import { useRouter } from "next/navigation";
 
 const GameContext = createContext<GameContextType | undefined>(undefined);
 
@@ -9,14 +16,38 @@ function GameProvider({ children }: { children: ReactNode }) {
   const [board, setBoard] = useState<(null | string)[]>(Array(9).fill(null));
   const [isxNext, setIsxNext] = useState<boolean>(true);
   const [gameWinner, setGameWinner] = useState<string>("");
+  const [xWinCount, setXwinCount] = useState<number>(0);
+  const [oWinCount, setOwinCount] = useState<number>(0);
+  const [tieCount, setTieCount] = useState<number>(0);
+  const [tie, setTie] = useState<boolean>(false);
+  const [winningLine, setWinningLine] = useState<number[]>([]);
+
+  const router = useRouter();
+
+  useEffect(
+    function () {
+      const { winner, line } = calculateWinner(board);
+      console.log("test winner: ", winner);
+      if (winner && winner !== gameWinner) {
+        setGameWinner(winner);
+        setWinningLine(line);
+        console.log(board);
+      }
+      const filteredBoards = board.filter((board) => board !== null);
+      if (filteredBoards.length === 9 && !winner) {
+        setTie(true);
+      }
+    },
+    [board]
+  );
 
   const handleClick = (index: number) => {
-    if (board[index] || calculateWinner(board)) return;
+    if (board[index] || calculateWinner(board).winner) return;
 
     const newBoard = [...board];
     newBoard[index] = isxNext ? "X" : "O";
     setBoard(newBoard);
-    if (!calculateWinner(newBoard)) {
+    if (!gameWinner) {
       setIsxNext(!isxNext);
     }
   };
@@ -36,17 +67,40 @@ function GameProvider({ children }: { children: ReactNode }) {
     for (const line of lines) {
       const [a, b, c] = line;
       if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-        setGameWinner(board[a]);
-        return board[a];
+        return { winner: board[a], line };
       }
     }
-    return null;
+    return { winner: null, line: [] };
   };
 
-  // check winner
-  const winner = calculateWinner(board);
-  console.log("test winner: ", winner);
-  if (winner) console.log(`Player ${winner} won the Game`);
+  const quitGame = () => {
+    setBoard(Array(9).fill(null));
+    setGameWinner("");
+    setIsxNext(true);
+    setTie(false);
+    setXwinCount(0);
+    setOwinCount(0);
+    setTieCount(0);
+    router.push("/");
+    setWinningLine([]);
+    console.log("Checking board Quit: ", board);
+  };
+
+  const nextRound = () => {
+    if (gameWinner === "O") {
+      setOwinCount((count) => count + 1);
+    } else if (gameWinner === "X") {
+      setXwinCount((count) => count + 1);
+    } else {
+      setTieCount((tie) => tie + 1);
+    }
+    setBoard(Array(9).fill(null));
+    setGameWinner("");
+    setIsxNext(true);
+    setTie(false);
+    setWinningLine([]);
+    console.log("Checking board Nextround: ", board);
+  };
 
   return (
     <GameContext.Provider
@@ -58,6 +112,18 @@ function GameProvider({ children }: { children: ReactNode }) {
         handleClick,
         gameWinner,
         setGameWinner,
+        quitGame,
+        xWinCount,
+        setXwinCount,
+        oWinCount,
+        setOwinCount,
+        tieCount,
+        setTieCount,
+        nextRound,
+        tie,
+        setTie,
+        winningLine,
+        setWinningLine,
       }}
     >
       {children}

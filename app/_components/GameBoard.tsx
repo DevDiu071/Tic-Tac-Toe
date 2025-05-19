@@ -8,13 +8,19 @@ import clsx from "clsx";
 import { FaCircleDot } from "react-icons/fa6";
 
 export default function GameBoard() {
-  const { board, handleClick, gameWinner } = useGame();
+  const { board, handleClick, winningLine, gameWinner } = useGame();
+  console.log(board);
   return (
     <div className="grid grid-cols-3 max-w-[328px] mx-auto gap-[20px]">
       {board.map((square, index) => (
         <button
           onClick={() => handleClick(index)}
-          className="bg-semi-dark-navy rounded-[10px] p-4 w-[96px] h-[96px] "
+          className={clsx(" rounded-[10px] p-4 w-[96px] h-[96px]", {
+            "bg-light-yellow":
+              gameWinner === "O" && winningLine.includes(index),
+            "bg-light-blue": gameWinner === "X" && winningLine.includes(index),
+            "bg-semi-dark-navy": !winningLine.includes(index),
+          })}
           key={index}
         >
           {square === "X" ? (
@@ -22,15 +28,14 @@ export default function GameBoard() {
               <Image src={xImg} alt="icon x" className="w-[40px] h-[40px]" />
             </div>
           ) : square === "O" ? (
-            <div
-              className={clsx("flex items-center justify-center", {
-                "bg-light-yellow": gameWinner === "O",
-              })}
-            >
-              {!gameWinner && (
+            <div className={clsx("flex items-center justify-center", {})}>
+              {gameWinner !== "O" ? (
                 <Image src={oImg} alt="icon o" className="w-[40px] h-[40px]" />
-              )}
-              {gameWinner === "O" && <FaCircleDot className="text-[31px]" />}
+              ) : gameWinner === "O" ? (
+                <FaCircleDot className="text-[31px]" />
+              ) : null}
+
+              {/* {gameWinner === "O" && <FaCircleDot className="text-[31px]" />} */}
             </div>
           ) : null}
         </button>

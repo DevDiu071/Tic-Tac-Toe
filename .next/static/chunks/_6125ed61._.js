@@ -81,11 +81,16 @@ var _s = __turbopack_context__.k.signature();
 function GameBoard() {
     _s();
     const { board, handleClick, gameWinner } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$_context$2f$GameContext$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useGame"])();
+    console.log(board);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "grid grid-cols-3 max-w-[328px] mx-auto gap-[20px]",
         children: board.map((square, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                 onClick: ()=>handleClick(index),
-                className: "bg-semi-dark-navy rounded-[10px] p-4 w-[96px] h-[96px] ",
+                className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$clsx$2f$dist$2f$clsx$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"])(" rounded-[10px] p-4 w-[96px] h-[96px]", {
+                    "bg-light-yellow": gameWinner === "O" && square === "O",
+                    "bg-light-blue": gameWinner === "X" && square === "X",
+                    "bg-semi-dark-navy": !gameWinner || gameWinner === "X" && square !== "X" || gameWinner === "O" && square !== "O"
+                }),
                 children: square === "X" ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: "flex items-center justify-center",
                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -94,48 +99,43 @@ function GameBoard() {
                         className: "w-[40px] h-[40px]"
                     }, void 0, false, {
                         fileName: "[project]/app/_components/GameBoard.tsx",
-                        lineNumber: 22,
+                        lineNumber: 30,
                         columnNumber: 15
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/app/_components/GameBoard.tsx",
-                    lineNumber: 21,
+                    lineNumber: 29,
                     columnNumber: 13
                 }, this) : square === "O" ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$clsx$2f$dist$2f$clsx$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"])("flex items-center justify-center", {
-                        "bg-light-yellow": gameWinner === "O"
-                    }),
-                    children: [
-                        !gameWinner && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                            src: __TURBOPACK__imported__module__$5b$project$5d2f$public$2f$images$2f$icon$2d$o$2e$svg$2e$mjs__$7b$__IMAGE__$3d3e$__$225b$project$5d2f$public$2f$images$2f$icon$2d$o$2e$svg__$28$static__in__ecmascript$2922$__$7d$__$5b$app$2d$client$5d$__$28$structured__image__object$2c$__ecmascript$29$__["default"],
-                            alt: "icon o",
-                            className: "w-[40px] h-[40px]"
-                        }, void 0, false, {
-                            fileName: "[project]/app/_components/GameBoard.tsx",
-                            lineNumber: 31,
-                            columnNumber: 17
-                        }, this),
-                        gameWinner === "O" && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fa6$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FaCircleDot"], {
-                            className: "text-[31px]"
-                        }, void 0, false, {
-                            fileName: "[project]/app/_components/GameBoard.tsx",
-                            lineNumber: 33,
-                            columnNumber: 38
-                        }, this)
-                    ]
-                }, void 0, true, {
+                    className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$clsx$2f$dist$2f$clsx$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"])("flex items-center justify-center", {}),
+                    children: gameWinner !== "O" ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                        src: __TURBOPACK__imported__module__$5b$project$5d2f$public$2f$images$2f$icon$2d$o$2e$svg$2e$mjs__$7b$__IMAGE__$3d3e$__$225b$project$5d2f$public$2f$images$2f$icon$2d$o$2e$svg__$28$static__in__ecmascript$2922$__$7d$__$5b$app$2d$client$5d$__$28$structured__image__object$2c$__ecmascript$29$__["default"],
+                        alt: "icon o",
+                        className: "w-[40px] h-[40px]"
+                    }, void 0, false, {
+                        fileName: "[project]/app/_components/GameBoard.tsx",
+                        lineNumber: 35,
+                        columnNumber: 17
+                    }, this) : gameWinner === "O" ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fa6$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FaCircleDot"], {
+                        className: "text-[31px]"
+                    }, void 0, false, {
+                        fileName: "[project]/app/_components/GameBoard.tsx",
+                        lineNumber: 37,
+                        columnNumber: 17
+                    }, this) : null
+                }, void 0, false, {
                     fileName: "[project]/app/_components/GameBoard.tsx",
-                    lineNumber: 25,
+                    lineNumber: 33,
                     columnNumber: 13
                 }, this) : null
             }, index, false, {
                 fileName: "[project]/app/_components/GameBoard.tsx",
-                lineNumber: 15,
+                lineNumber: 16,
                 columnNumber: 9
             }, this))
     }, void 0, false, {
         fileName: "[project]/app/_components/GameBoard.tsx",
-        lineNumber: 13,
+        lineNumber: 14,
         columnNumber: 5
     }, this);
 }

@@ -27,6 +27,16 @@ function GameProvider({ children }) {
     const [board, setBoard] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(Array(9).fill(null));
     const [isxNext, setIsxNext] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(true);
     const [gameWinner, setGameWinner] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("");
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(function() {
+        const winner = calculateWinner(board);
+        console.log("test winner: ", winner);
+        if (winner && winner !== gameWinner) {
+            setGameWinner(winner);
+            console.log(board);
+        }
+    }, [
+        board
+    ]);
     const handleClick = (index)=>{
         if (board[index] || calculateWinner(board)) return;
         const newBoard = [
@@ -34,7 +44,7 @@ function GameProvider({ children }) {
         ];
         newBoard[index] = isxNext ? "X" : "O";
         setBoard(newBoard);
-        if (!calculateWinner(newBoard)) {
+        if (!gameWinner) {
             setIsxNext(!isxNext);
         }
     };
@@ -84,16 +94,16 @@ function GameProvider({ children }) {
         for (const line of lines){
             const [a, b, c] = line;
             if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-                setGameWinner(board[a]);
                 return board[a];
             }
         }
         return null;
     };
-    // check winner
-    const winner = calculateWinner(board);
-    console.log("test winner: ", winner);
-    if (winner) console.log(`Player ${winner} won the Game`);
+    const quitGame = ()=>{
+        setBoard(Array(9).fill(null));
+        setGameWinner("");
+        setIsxNext(true);
+    };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(GameContext.Provider, {
         value: {
             board,
@@ -107,7 +117,7 @@ function GameProvider({ children }) {
         children: children
     }, void 0, false, {
         fileName: "[project]/app/_context/GameContext.tsx",
-        lineNumber: 52,
+        lineNumber: 70,
         columnNumber: 5
     }, this);
 }
