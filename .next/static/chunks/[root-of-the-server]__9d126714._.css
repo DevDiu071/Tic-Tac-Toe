@@ -99,6 +99,9 @@
       --tw-translate-x: 0;
       --tw-translate-y: 0;
       --tw-translate-z: 0;
+      --tw-scale-x: 1;
+      --tw-scale-y: 1;
+      --tw-scale-z: 1;
       --tw-rotate-x: initial;
       --tw-rotate-y: initial;
       --tw-rotate-z: initial;
@@ -542,6 +545,10 @@
     }
   }
 
+  .m-10 {
+    margin: calc(var(--spacing) * 10);
+  }
+
   .mx-auto {
     margin-inline: auto;
   }
@@ -763,6 +770,20 @@
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
 
+  .scale-40 {
+    --tw-scale-x: 40%;
+    --tw-scale-y: 40%;
+    --tw-scale-z: 40%;
+    scale: var(--tw-scale-x) var(--tw-scale-y);
+  }
+
+  .scale-50 {
+    --tw-scale-x: 50%;
+    --tw-scale-y: 50%;
+    --tw-scale-z: 50%;
+    scale: var(--tw-scale-x) var(--tw-scale-y);
+  }
+
   .transform {
     transform: var(--tw-rotate-x, ) var(--tw-rotate-y, ) var(--tw-rotate-z, ) var(--tw-skew-x, ) var(--tw-skew-y, );
   }
@@ -879,6 +900,10 @@
     border-radius: .25rem;
   }
 
+  .rounded-\[2px\] {
+    border-radius: 2px;
+  }
+
   .rounded-\[5px\] {
     border-radius: 5px;
   }
@@ -973,6 +998,14 @@
     fill: var(--color-blue-400);
   }
 
+  .fill-grey {
+    fill: var(--color-grey);
+  }
+
+  .fill-silver {
+    fill: var(--color-silver);
+  }
+
   .p-2 {
     padding: calc(var(--spacing) * 2);
   }
@@ -989,6 +1022,10 @@
     padding: calc(var(--spacing) * 4);
   }
 
+  .p-4\.5 {
+    padding: calc(var(--spacing) * 4.5);
+  }
+
   .p-8 {
     padding: calc(var(--spacing) * 8);
   }
@@ -999,6 +1036,10 @@
 
   .px-1 {
     padding-inline: calc(var(--spacing) * 1);
+  }
+
+  .px-2 {
+    padding-inline: calc(var(--spacing) * 2);
   }
 
   .px-3 {
@@ -1027,6 +1068,10 @@
 
   .py-0\.5 {
     padding-block: calc(var(--spacing) * .5);
+  }
+
+  .py-3 {
+    padding-block: calc(var(--spacing) * 3);
   }
 
   .pt-\[9px\] {
@@ -1130,6 +1175,10 @@
 
   .text-blue-400 {
     color: var(--color-blue-400);
+  }
+
+  .text-grey {
+    color: var(--color-grey);
   }
 
   .text-light-blue {
@@ -1390,6 +1439,24 @@ body {
   syntax: "*";
   inherits: false;
   initial-value: 0;
+}
+
+@property --tw-scale-x {
+  syntax: "*";
+  inherits: false;
+  initial-value: 1;
+}
+
+@property --tw-scale-y {
+  syntax: "*";
+  inherits: false;
+  initial-value: 1;
+}
+
+@property --tw-scale-z {
+  syntax: "*";
+  inherits: false;
+  initial-value: 1;
 }
 
 @property --tw-rotate-x {
