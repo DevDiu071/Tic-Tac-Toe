@@ -78,11 +78,7 @@ function GameBoard() {
         className: "grid grid-cols-3 max-w-[328px] mx-auto gap-[20px]",
         children: board.map((square, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                 onClick: ()=>handleClick(index),
-                className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$clsx$2f$dist$2f$clsx$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"])(" rounded-[10px] p-4 w-[96px] h-[96px]", {
-                    "bg-light-yellow": gameWinner === "O" && winningLine.includes(index),
-                    "bg-light-blue": gameWinner === "X" && winningLine.includes(index),
-                    "bg-semi-dark-navy": !winningLine.includes(index)
-                }),
+                className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$clsx$2f$dist$2f$clsx$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"])("rounded-[10px] p-4 w-[96px] h-[96px]", winningLine.includes(index) ? gameWinner === "O" ? "bg-light-yellow" : "bg-light-blue" : "bg-semi-dark-navy"),
                 children: square === "X" ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: "flex items-center justify-center",
                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -91,12 +87,12 @@ function GameBoard() {
                         className: "w-[40px] h-[40px]"
                     }, void 0, false, {
                         fileName: "[project]/app/_components/GameBoard.tsx",
-                        lineNumber: 28,
+                        lineNumber: 30,
                         columnNumber: 15
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/app/_components/GameBoard.tsx",
-                    lineNumber: 27,
+                    lineNumber: 29,
                     columnNumber: 13
                 }, this) : square === "O" ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$clsx$2f$dist$2f$clsx$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"])("flex items-center justify-center", {}),
@@ -106,18 +102,18 @@ function GameBoard() {
                         className: "w-[40px] h-[40px]"
                     }, void 0, false, {
                         fileName: "[project]/app/_components/GameBoard.tsx",
-                        lineNumber: 33,
+                        lineNumber: 35,
                         columnNumber: 17
                     }, this) : gameWinner === "O" ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fa6$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["FaCircleDot"], {
                         className: "text-[31px]"
                     }, void 0, false, {
                         fileName: "[project]/app/_components/GameBoard.tsx",
-                        lineNumber: 35,
+                        lineNumber: 37,
                         columnNumber: 17
                     }, this) : null
                 }, void 0, false, {
                     fileName: "[project]/app/_components/GameBoard.tsx",
-                    lineNumber: 31,
+                    lineNumber: 33,
                     columnNumber: 13
                 }, this) : null
             }, index, false, {
@@ -281,7 +277,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$_context$2f$GameConte
 ;
 ;
 function Stats() {
-    const { xWinCount, oWinCount, tieCount } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$_context$2f$GameContext$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useGame"])();
+    const { xWinCount, oWinCount, selectedMark, tieCount } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$_context$2f$GameContext$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useGame"])();
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "flex items-center gap-x-[20px] justify-center mt-[20px]",
         children: [
@@ -290,8 +286,12 @@ function Stats() {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "text-[14px]",
-                        children: "X (P2)"
-                    }, void 0, false, {
+                        children: [
+                            "X (",
+                            selectedMark === "X" ? "P1" : "P2",
+                            ")"
+                        ]
+                    }, void 0, true, {
                         fileName: "[project]/app/_components/Stats.tsx",
                         lineNumber: 11,
                         columnNumber: 9
@@ -340,8 +340,12 @@ function Stats() {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "text-[14px]",
-                        children: "O (P1)"
-                    }, void 0, false, {
+                        children: [
+                            "O (",
+                            selectedMark === "O" ? "P1" : "P2",
+                            ")"
+                        ]
+                    }, void 0, true, {
                         fileName: "[project]/app/_components/Stats.tsx",
                         lineNumber: 19,
                         columnNumber: 9
@@ -388,18 +392,26 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$public$2f$images$2f$icon$2d$
 ;
 ;
 function WinScreen() {
-    const { gameWinner, quitGame, tie, nextRound } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$_context$2f$GameContext$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useGame"])();
+    const { gameWinner, selectedMark, quitGame, tie, nextRound } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$_context$2f$GameContext$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useGame"])();
     return gameWinner || tie ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "absolute z-30 pb-[40px] h-[228px] w-full top-[220px] bottom-[220px] bg-semi-dark-navy transform",
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "flex flex-col justify-center items-center",
             children: [
-                !tie && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                !tie && gameWinner === selectedMark && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                     className: "mt-[40px] mb-[16px] font-bold text-silver",
-                    children: "PLAYER 1 WINS!"
+                    children: "YOU WON!"
                 }, void 0, false, {
                     fileName: "[project]/app/_components/WinScreen.tsx",
                     lineNumber: 15,
+                    columnNumber: 11
+                }, this),
+                !tie && gameWinner !== selectedMark && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                    className: "mt-[40px] mb-[16px] font-bold text-silver",
+                    children: "OH NO, YOU LOST..."
+                }, void 0, false, {
+                    fileName: "[project]/app/_components/WinScreen.tsx",
+                    lineNumber: 18,
                     columnNumber: 11
                 }, this),
                 tie && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -407,7 +419,7 @@ function WinScreen() {
                     children: "ROUND TIED"
                 }, void 0, false, {
                     fileName: "[project]/app/_components/WinScreen.tsx",
-                    lineNumber: 20,
+                    lineNumber: 23,
                     columnNumber: 11
                 }, this),
                 !tie && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -419,7 +431,7 @@ function WinScreen() {
                             className: "w-[28px] h-[28px]"
                         }, void 0, false, {
                             fileName: "[project]/app/_components/WinScreen.tsx",
-                            lineNumber: 27,
+                            lineNumber: 30,
                             columnNumber: 15
                         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                             src: __TURBOPACK__imported__module__$5b$project$5d2f$public$2f$images$2f$icon$2d$o$2e$svg$2e$mjs__$7b$__IMAGE__$3d3e$__$225b$project$5d2f$public$2f$images$2f$icon$2d$o$2e$svg__$28$static__in__ecmascript$2922$__$7d$__$5b$app$2d$ssr$5d$__$28$structured__image__object$2c$__ecmascript$29$__["default"],
@@ -427,7 +439,7 @@ function WinScreen() {
                             className: "w-[28px] h-[28px]"
                         }, void 0, false, {
                             fileName: "[project]/app/_components/WinScreen.tsx",
-                            lineNumber: 29,
+                            lineNumber: 32,
                             columnNumber: 15
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -435,13 +447,13 @@ function WinScreen() {
                             children: "TAKES THE ROUND"
                         }, void 0, false, {
                             fileName: "[project]/app/_components/WinScreen.tsx",
-                            lineNumber: 31,
+                            lineNumber: 34,
                             columnNumber: 13
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/_components/WinScreen.tsx",
-                    lineNumber: 25,
+                    lineNumber: 28,
                     columnNumber: 11
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -453,7 +465,7 @@ function WinScreen() {
                             children: "QUIT"
                         }, void 0, false, {
                             fileName: "[project]/app/_components/WinScreen.tsx",
-                            lineNumber: 37,
+                            lineNumber: 40,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -462,13 +474,13 @@ function WinScreen() {
                             children: "NEXT ROUND"
                         }, void 0, false, {
                             fileName: "[project]/app/_components/WinScreen.tsx",
-                            lineNumber: 43,
+                            lineNumber: 46,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/_components/WinScreen.tsx",
-                    lineNumber: 36,
+                    lineNumber: 39,
                     columnNumber: 9
                 }, this)
             ]

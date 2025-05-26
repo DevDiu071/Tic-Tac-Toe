@@ -4,6 +4,7 @@ import Header from "../_components/Header";
 import Stats from "../_components/Stats";
 import WinScreen from "../_components/WinScreen";
 import Overlay from "../_components/Overlay";
+import MultiPlayerWinScreen from "../_components/MultiPlayerWinScreen";
 
 export default function page() {
   return (
@@ -11,7 +12,7 @@ export default function page() {
       <Header />
       <GameBoard />
       <Stats />
-      <WinScreen />
+      <MultiPlayerWinScreen />
       <Overlay />
     </div>
   );

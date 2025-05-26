@@ -13,10 +13,14 @@ export interface GameContextType {
   quitGame: () => void;
   nextRound: () => void;
   handleSoloClick: (index: number) => void;
+  handleMarkSelection: (mark: "X" | "O") => void;
+  multiPlayerNextRound: () => void;
   xWinCount: number;
   oWinCount: number;
   tieCount: number;
   tie: boolean;
+  multiPlayerMode: boolean;
+  setMultiPlayerMode: Dispatch<SetStateAction<boolean>>;
   setSelectedMark: Dispatch<SetStateAction<string>>;
   selectedMark: string;
   setTie: Dispatch<SetStateAction<boolean>>;

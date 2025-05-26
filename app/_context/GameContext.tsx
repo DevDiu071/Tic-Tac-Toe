@@ -22,17 +22,18 @@ function GameProvider({ children }: { children: ReactNode }) {
   const [tie, setTie] = useState<boolean>(false);
   const [winningLine, setWinningLine] = useState<number[]>([]);
   const [selectedMark, setSelectedMark] = useState<string>("X");
+  const [multiPlayerMode, setMultiPlayerMode] = useState<boolean>(false);
 
   const router = useRouter();
 
   useEffect(
     function () {
       const { winner, line } = calculateWinner(board);
-      console.log("test winner: ", winner);
+      console.log("test winner: ", line, gameWinner);
       if (winner && winner !== gameWinner) {
         setGameWinner(winner);
         setWinningLine(line);
-        console.log(board);
+        console.log("LINESSSSSSSS: ", line);
       }
       const filteredBoards = board.filter((board) => board !== null);
       if (filteredBoards.length === 9 && !winner) {
@@ -42,6 +43,18 @@ function GameProvider({ children }: { children: ReactNode }) {
     [board]
   );
 
+  // When player selects O, AI (X) makes the first move
+  useEffect(() => {
+    if (
+      selectedMark === "O" &&
+      board.every((cell) => cell === null) &&
+      !gameWinner &&
+      !multiPlayerMode
+    ) {
+      setTimeout(() => makeAIMove([...board]), 500);
+    }
+  }, [selectedMark, board, multiPlayerMode]); // Trigger when selectedMark changes or board resets
+
   const handleClick = (index: number) => {
     if (board[index] || calculateWinner(board).winner) return;
 
@@ -50,6 +63,18 @@ function GameProvider({ children }: { children: ReactNode }) {
     setBoard(newBoard);
     if (!gameWinner) {
       setIsxNext(!isxNext);
+    }
+  };
+
+  const handleMarkSelection = (mark: "X" | "O") => {
+    setSelectedMark(mark);
+    setBoard(Array(9).fill(null)); // Reset board
+    setGameWinner(""); // Clear winner
+    setIsxNext(true); // Ensure X goes first
+
+    // If player selects O, AI (X) makes the first move
+    if (mark === "O" && !multiPlayerMode) {
+      setTimeout(() => makeAIMove(Array(9).fill(null)), 500);
     }
   };
 
@@ -64,22 +89,24 @@ function GameProvider({ children }: { children: ReactNode }) {
   const minimax = (
     board: (string | null)[],
     depth: number,
-    isMaximizing: boolean
+    isMaximizing: boolean,
+    aiMark: string
   ) => {
     const winner = calculateWinner(board).winner;
+    const humanMark = aiMark === "X" ? "O" : "X";
 
     // Terminal conditions
-    if (winner === "X") return -10 + depth; // AI loses
-    if (winner === "O") return 10 - depth; // AI wins
+    if (winner === humanMark) return -10 + depth; // AI loses
+    if (winner === aiMark) return 10 - depth; // AI wins
     if (isBoardFull(board)) return 0; // Draw
 
     if (isMaximizing) {
       let bestScore = -Infinity;
       for (let i = 0; i < board.length; i++) {
         if (!board[i]) {
-          board[i] = "O"; // AI is "O"
-          const score = minimax(board, depth + 1, false);
-          board[i] = null; // Undo move
+          board[i] = aiMark;
+          const score = minimax(board, depth + 1, false, aiMark);
+          board[i] = null;
           bestScore = Math.max(score, bestScore);
         }
       }
@@ -88,9 +115,9 @@ function GameProvider({ children }: { children: ReactNode }) {
       let bestScore = Infinity;
       for (let i = 0; i < board.length; i++) {
         if (!board[i]) {
-          board[i] = "X"; // Player is "X"
-          const score = minimax(board, depth + 1, true);
-          board[i] = null; // Undo move
+          board[i] = humanMark;
+          const score = minimax(board, depth + 1, true, aiMark);
+          board[i] = null;
           bestScore = Math.min(score, bestScore);
         }
       }
@@ -100,14 +127,15 @@ function GameProvider({ children }: { children: ReactNode }) {
 
   // AI makes the best move using Minimax
   const makeAIMove = (currentBoard: (string | null)[]) => {
+    const aiMark = selectedMark === "X" ? "O" : "X"; // AI is opposite of player
     let bestScore = -Infinity;
     let bestMove = -1;
 
     for (let i = 0; i < currentBoard.length; i++) {
       if (!currentBoard[i]) {
-        currentBoard[i] = "O"; // AI is "O"
-        const score = minimax(currentBoard, 0, false);
-        currentBoard[i] = null; // Undo move
+        currentBoard[i] = aiMark;
+        const score = minimax(currentBoard, 0, false, aiMark);
+        currentBoard[i] = null;
         if (score > bestScore) {
           bestScore = score;
           bestMove = i;
@@ -117,21 +145,23 @@ function GameProvider({ children }: { children: ReactNode }) {
 
     if (bestMove !== -1) {
       const newBoard = [...currentBoard];
-      newBoard[bestMove] = "O";
+      newBoard[bestMove] = aiMark;
       setBoard(newBoard);
-      // Check if AI won
       const winner = calculateWinner(newBoard).winner;
       if (winner) setGameWinner(winner);
     }
   };
 
   const handleSoloClick = (index: number) => {
+    // If in multiplayer mode, do nothing (or handle differently)
+    if (multiPlayerMode) return;
+
     // If cell is occupied or game is over, do nothing
-    if (board[index] || calculateWinner(board).winner) return;
+    if (board[index] || gameWinner) return;
 
     // Player makes a move
     const newBoard = [...board];
-    newBoard[index] = isxNext ? "X" : "O"; // Assume player is "X"
+    newBoard[index] = selectedMark;
     setBoard(newBoard);
 
     // Check if player won
@@ -141,9 +171,9 @@ function GameProvider({ children }: { children: ReactNode }) {
       return;
     }
 
-    // If no winner, trigger AI move (assuming AI is "O")
-    if (!winner) {
-      setTimeout(() => makeAIMove(newBoard), 500); // Delay for UX
+    // If no winner and game isn't over, trigger AI move
+    if (!isBoardFull(newBoard)) {
+      setTimeout(() => makeAIMove(newBoard), 500);
     }
   };
 
@@ -178,10 +208,29 @@ function GameProvider({ children }: { children: ReactNode }) {
     setTieCount(0);
     router.push("/");
     setWinningLine([]);
+    setMultiPlayerMode(false);
     console.log("Checking board Quit: ", board);
   };
 
   const nextRound = () => {
+    // Update scores
+    if (gameWinner === "O") setOwinCount((count) => count + 1);
+    else if (gameWinner === "X") setXwinCount((count) => count + 1);
+    else setTieCount((tie) => tie + 1);
+
+    // Reset game state
+    setBoard(Array(9).fill(null));
+    setGameWinner("");
+    setTie(false);
+    setWinningLine([]);
+
+    // If in solo mode and player is "O", AI ("X") makes the first move
+    if (!multiPlayerMode && selectedMark === "O") {
+      setTimeout(() => makeAIMove(Array(9).fill(null)), 500);
+    }
+  };
+
+  const multiPlayerNextRound = () => {
     if (gameWinner === "O") {
       setOwinCount((count) => count + 1);
     } else if (gameWinner === "X") {
@@ -222,6 +271,10 @@ function GameProvider({ children }: { children: ReactNode }) {
         winningLine,
         setWinningLine,
         handleSoloClick,
+        handleMarkSelection,
+        multiPlayerMode,
+        setMultiPlayerMode,
+        multiPlayerNextRound,
       }}
     >
       {children}

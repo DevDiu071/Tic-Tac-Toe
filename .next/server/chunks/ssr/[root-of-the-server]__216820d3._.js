@@ -59,14 +59,15 @@ function GameProvider({ children }) {
     const [tie, setTie] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     const [winningLine, setWinningLine] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([]);
     const [selectedMark, setSelectedMark] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("X");
+    const [multiPlayerMode, setMultiPlayerMode] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     const router = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRouter"])();
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(function() {
         const { winner, line } = calculateWinner(board);
-        console.log("test winner: ", winner);
+        console.log("test winner: ", line, gameWinner);
         if (winner && winner !== gameWinner) {
             setGameWinner(winner);
             setWinningLine(line);
-            console.log(board);
+            console.log("LINESSSSSSSS: ", line);
         }
         const filteredBoards = board.filter((board)=>board !== null);
         if (filteredBoards.length === 9 && !winner) {
@@ -75,6 +76,18 @@ function GameProvider({ children }) {
     }, [
         board
     ]);
+    // When player selects O, AI (X) makes the first move
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
+        if (selectedMark === "O" && board.every((cell)=>cell === null) && !gameWinner && !multiPlayerMode) {
+            setTimeout(()=>makeAIMove([
+                    ...board
+                ]), 500);
+        }
+    }, [
+        selectedMark,
+        board,
+        multiPlayerMode
+    ]); // Trigger when selectedMark changes or board resets
     const handleClick = (index)=>{
         if (board[index] || calculateWinner(board).winner) return;
         const newBoard = [
@@ -86,25 +99,36 @@ function GameProvider({ children }) {
             setIsxNext(!isxNext);
         }
     };
+    const handleMarkSelection = (mark)=>{
+        setSelectedMark(mark);
+        setBoard(Array(9).fill(null)); // Reset board
+        setGameWinner(""); // Clear winner
+        setIsxNext(true); // Ensure X goes first
+        // If player selects O, AI (X) makes the first move
+        if (mark === "O" && !multiPlayerMode) {
+            setTimeout(()=>makeAIMove(Array(9).fill(null)), 500);
+        }
+    };
     ///////////// AI LOGIC
     // Check if board is full (for Minimax)
     const isBoardFull = (board)=>{
         return board.every((cell)=>cell !== null);
     };
     // Minimax algorithm
-    const minimax = (board, depth, isMaximizing)=>{
+    const minimax = (board, depth, isMaximizing, aiMark)=>{
         const winner = calculateWinner(board).winner;
+        const humanMark = aiMark === "X" ? "O" : "X";
         // Terminal conditions
-        if (winner === "X") return -10 + depth; // AI loses
-        if (winner === "O") return 10 - depth; // AI wins
+        if (winner === humanMark) return -10 + depth; // AI loses
+        if (winner === aiMark) return 10 - depth; // AI wins
         if (isBoardFull(board)) return 0; // Draw
         if (isMaximizing) {
             let bestScore = -Infinity;
             for(let i = 0; i < board.length; i++){
                 if (!board[i]) {
-                    board[i] = "O"; // AI is "O"
-                    const score = minimax(board, depth + 1, false);
-                    board[i] = null; // Undo move
+                    board[i] = aiMark;
+                    const score = minimax(board, depth + 1, false, aiMark);
+                    board[i] = null;
                     bestScore = Math.max(score, bestScore);
                 }
             }
@@ -113,9 +137,9 @@ function GameProvider({ children }) {
             let bestScore = Infinity;
             for(let i = 0; i < board.length; i++){
                 if (!board[i]) {
-                    board[i] = "X"; // Player is "X"
-                    const score = minimax(board, depth + 1, true);
-                    board[i] = null; // Undo move
+                    board[i] = humanMark;
+                    const score = minimax(board, depth + 1, true, aiMark);
+                    board[i] = null;
                     bestScore = Math.min(score, bestScore);
                 }
             }
@@ -124,13 +148,14 @@ function GameProvider({ children }) {
     };
     // AI makes the best move using Minimax
     const makeAIMove = (currentBoard)=>{
+        const aiMark = selectedMark === "X" ? "O" : "X"; // AI is opposite of player
         let bestScore = -Infinity;
         let bestMove = -1;
         for(let i = 0; i < currentBoard.length; i++){
             if (!currentBoard[i]) {
-                currentBoard[i] = "O"; // AI is "O"
-                const score = minimax(currentBoard, 0, false);
-                currentBoard[i] = null; // Undo move
+                currentBoard[i] = aiMark;
+                const score = minimax(currentBoard, 0, false, aiMark);
+                currentBoard[i] = null;
                 if (score > bestScore) {
                     bestScore = score;
                     bestMove = i;
@@ -141,21 +166,22 @@ function GameProvider({ children }) {
             const newBoard = [
                 ...currentBoard
             ];
-            newBoard[bestMove] = "O";
+            newBoard[bestMove] = aiMark;
             setBoard(newBoard);
-            // Check if AI won
             const winner = calculateWinner(newBoard).winner;
             if (winner) setGameWinner(winner);
         }
     };
     const handleSoloClick = (index)=>{
+        // If in multiplayer mode, do nothing (or handle differently)
+        if (multiPlayerMode) return;
         // If cell is occupied or game is over, do nothing
-        if (board[index] || calculateWinner(board).winner) return;
+        if (board[index] || gameWinner) return;
         // Player makes a move
         const newBoard = [
             ...board
         ];
-        newBoard[index] = isxNext ? "X" : "O"; // Assume player is "X"
+        newBoard[index] = selectedMark;
         setBoard(newBoard);
         // Check if player won
         const winner = calculateWinner(newBoard).winner;
@@ -163,9 +189,9 @@ function GameProvider({ children }) {
             setGameWinner(winner);
             return;
         }
-        // If no winner, trigger AI move (assuming AI is "O")
-        if (!winner) {
-            setTimeout(()=>makeAIMove(newBoard), 500); // Delay for UX
+        // If no winner and game isn't over, trigger AI move
+        if (!isBoardFull(newBoard)) {
+            setTimeout(()=>makeAIMove(newBoard), 500);
         }
     };
     const calculateWinner = (board)=>{
@@ -235,9 +261,25 @@ function GameProvider({ children }) {
         setTieCount(0);
         router.push("/");
         setWinningLine([]);
+        setMultiPlayerMode(false);
         console.log("Checking board Quit: ", board);
     };
     const nextRound = ()=>{
+        // Update scores
+        if (gameWinner === "O") setOwinCount((count)=>count + 1);
+        else if (gameWinner === "X") setXwinCount((count)=>count + 1);
+        else setTieCount((tie)=>tie + 1);
+        // Reset game state
+        setBoard(Array(9).fill(null));
+        setGameWinner("");
+        setTie(false);
+        setWinningLine([]);
+        // If in solo mode and player is "O", AI ("X") makes the first move
+        if (!multiPlayerMode && selectedMark === "O") {
+            setTimeout(()=>makeAIMove(Array(9).fill(null)), 500);
+        }
+    };
+    const multiPlayerNextRound = ()=>{
         if (gameWinner === "O") {
             setOwinCount((count)=>count + 1);
         } else if (gameWinner === "X") {
@@ -275,12 +317,16 @@ function GameProvider({ children }) {
             setSelectedMark,
             winningLine,
             setWinningLine,
-            handleSoloClick
+            handleSoloClick,
+            handleMarkSelection,
+            multiPlayerMode,
+            setMultiPlayerMode,
+            multiPlayerNextRound
         },
         children: children
     }, void 0, false, {
         fileName: "[project]/app/_context/GameContext.tsx",
-        lineNumber: 201,
+        lineNumber: 250,
         columnNumber: 5
     }, this);
 }

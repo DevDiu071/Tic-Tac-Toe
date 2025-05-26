@@ -8,7 +8,7 @@ import clsx from "clsx";
 import { useGame } from "../_context/GameContext";
 
 export default function PlayerMark() {
-  const { selectedMark, setSelectedMark } = useGame();
+  const { selectedMark, setSelectedMark, handleMarkSelection } = useGame();
   return (
     <div className="bg-semi-dark-navy mt-[32px] shad pt-[24px] rounded-[15px]">
       <h1 className="text-silver font-bold text-[16px] text-center">
@@ -18,12 +18,12 @@ export default function PlayerMark() {
         <div className="grid grid-cols-2 px-2 gap-x-3 items-center mt-[24px] mb-[17px] h-[72px] rounded-[10px] bg-dark-navy w-[279px]">
           <button
             className={clsx(
-              "flex p-3 rounded-[10px] items-center justify-center",
+              "flex p-3 cursor-pointer rounded-[10px] items-center justify-center",
               {
                 "bg-silver": selectedMark === "X",
               }
             )}
-            onClick={() => setSelectedMark("X")}
+            onClick={() => handleMarkSelection("X")}
           >
             <svg
               className="w-[31px] h-[31px]"
@@ -40,10 +40,13 @@ export default function PlayerMark() {
             </svg>
           </button>
           <button
-            onClick={() => setSelectedMark("O")}
-            className={clsx("p-2.5 rounded-[10px] flex justify-center", {
-              "bg-silver text-grey": selectedMark === "O",
-            })}
+            onClick={() => handleMarkSelection("O")}
+            className={clsx(
+              "p-3 cursor-pointer rounded-[10px] flex justify-center",
+              {
+                "bg-silver text-grey": selectedMark === "O",
+              }
+            )}
           >
             <FaCircleDot
               className={clsx("text-[31px]", {

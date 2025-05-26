@@ -6,20 +6,29 @@ import Image from "next/image";
 import { useGame } from "../_context/GameContext";
 import oImg from "@/public/images/icon-o.svg";
 
-export default function WinScreen() {
-  const { gameWinner, selectedMark, quitGame, tie, nextRound } = useGame();
+export default function MultiPlayerWinScreen() {
+  const {
+    gameWinner,
+    selectedMark,
+    multiPlayerMode,
+    multiPlayerNextRound,
+    quitGame,
+    tie,
+  } = useGame();
   return gameWinner || tie ? (
     <div className="absolute z-30 pb-[40px] h-[228px] w-full top-[220px] bottom-[220px] bg-semi-dark-navy transform">
       <div className="flex flex-col justify-center items-center">
-        {!tie && gameWinner === selectedMark && (
-          <p className="mt-[40px] mb-[16px] font-bold text-silver">YOU WON!</p>
-        )}
-        {!tie && gameWinner !== selectedMark && (
+        {!tie && gameWinner === selectedMark && multiPlayerMode && (
           <p className="mt-[40px] mb-[16px] font-bold text-silver">
-            OH NO, YOU LOST...
+            PLAYER 1 WIN!
           </p>
         )}
-        {tie && (
+        {!tie && gameWinner !== selectedMark && multiPlayerMode && (
+          <p className="mt-[40px] mb-[16px] font-bold text-silver">
+            PLAYER 2 WINS!
+          </p>
+        )}
+        {tie && multiPlayerMode && (
           <p className="font-bold text-silver mt-[50px] mb-[24px] text-[24px]">
             ROUND TIED
           </p>
@@ -44,7 +53,7 @@ export default function WinScreen() {
             QUIT
           </button>
           <button
-            onClick={nextRound}
+            onClick={multiPlayerNextRound}
             className="text-[16px] h-[56px] w-[146px] bg-light-yellow font-bold px-[17px] rounded-[10px]"
           >
             NEXT ROUND

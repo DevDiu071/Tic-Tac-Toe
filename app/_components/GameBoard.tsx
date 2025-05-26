@@ -15,12 +15,14 @@ export default function GameBoard() {
       {board.map((square, index) => (
         <button
           onClick={() => handleClick(index)}
-          className={clsx(" rounded-[10px] p-4 w-[96px] h-[96px]", {
-            "bg-light-yellow":
-              gameWinner === "O" && winningLine.includes(index),
-            "bg-light-blue": gameWinner === "X" && winningLine.includes(index),
-            "bg-semi-dark-navy": !winningLine.includes(index),
-          })}
+          className={clsx(
+            "rounded-[10px] p-4 w-[96px] h-[96px]",
+            winningLine.includes(index)
+              ? gameWinner === "O"
+                ? "bg-light-yellow"
+                : "bg-light-blue"
+              : "bg-semi-dark-navy"
+          )}
           key={index}
         >
           {square === "X" ? (
