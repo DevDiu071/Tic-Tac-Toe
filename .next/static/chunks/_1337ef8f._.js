@@ -30,6 +30,8 @@ function GameProvider({ children }) {
     const [winningLine, setWinningLine] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([]);
     const [selectedMark, setSelectedMark] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("X");
     const [multiPlayerMode, setMultiPlayerMode] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [hoveredIndex, setHoveredIndex] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
+    const [showRestart, setShowRestart] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const router = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"])();
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "GameProvider.useEffect": function() {
@@ -242,7 +244,6 @@ function GameProvider({ children }) {
         router.push("/");
         setWinningLine([]);
         setMultiPlayerMode(false);
-        console.log("Checking board Quit: ", board);
     };
     const nextRound = ()=>{
         // Update scores
@@ -274,6 +275,17 @@ function GameProvider({ children }) {
         setWinningLine([]);
         console.log("Checking board Nextround: ", board);
     };
+    const restartGame = ()=>{
+        setBoard(Array(9).fill(null));
+        setGameWinner("");
+        setIsxNext(true);
+        setTie(false);
+        setXwinCount(0);
+        setOwinCount(0);
+        setTieCount(0);
+        setWinningLine([]);
+        setShowRestart(false);
+    };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(GameContext.Provider, {
         value: {
             board,
@@ -301,16 +313,21 @@ function GameProvider({ children }) {
             handleMarkSelection,
             multiPlayerMode,
             setMultiPlayerMode,
-            multiPlayerNextRound
+            hoveredIndex,
+            setHoveredIndex,
+            multiPlayerNextRound,
+            setShowRestart,
+            showRestart,
+            restartGame
         },
         children: children
     }, void 0, false, {
         fileName: "[project]/app/_context/GameContext.tsx",
-        lineNumber: 250,
+        lineNumber: 263,
         columnNumber: 5
     }, this);
 }
-_s(GameProvider, "RPvnDt4P10BMExOnKvr6g4zi4fY=", false, function() {
+_s(GameProvider, "I7jDNdhQNlpFvJ78+YPApq7Ajp8=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"]
     ];

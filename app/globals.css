@@ -26,6 +26,10 @@
   box-shadow: inset 0 -8px #cc8b13;
 }
 
+.shadow-restart {
+  box-shadow: inset 0 -4px #cc8b13;
+}
+
 .shadow-multi-btn {
   box-shadow: inset 0 -8px #118c87;
 }

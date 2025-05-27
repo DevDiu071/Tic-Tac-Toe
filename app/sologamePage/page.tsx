@@ -5,6 +5,7 @@ import Stats from "../_components/Stats";
 import WinScreen from "../_components/WinScreen";
 import Overlay from "../_components/Overlay";
 import SoloGameBoard from "../_components/SoloGameBoard";
+import Restart from "../_components/Restart";
 
 export default function page() {
   return (
@@ -13,6 +14,7 @@ export default function page() {
       <SoloGameBoard />
       <Stats />
       <WinScreen />
+      <Restart />
       <Overlay />
     </div>
   );

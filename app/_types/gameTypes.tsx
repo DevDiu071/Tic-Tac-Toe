@@ -15,11 +15,16 @@ export interface GameContextType {
   handleSoloClick: (index: number) => void;
   handleMarkSelection: (mark: "X" | "O") => void;
   multiPlayerNextRound: () => void;
+  restartGame: () => void;
   xWinCount: number;
   oWinCount: number;
   tieCount: number;
   tie: boolean;
+  setHoveredIndex: Dispatch<SetStateAction<number | null>>;
+  hoveredIndex: number | null;
   multiPlayerMode: boolean;
+  setShowRestart: Dispatch<SetStateAction<boolean>>;
+  showRestart: boolean;
   setMultiPlayerMode: Dispatch<SetStateAction<boolean>>;
   setSelectedMark: Dispatch<SetStateAction<string>>;
   selectedMark: string;

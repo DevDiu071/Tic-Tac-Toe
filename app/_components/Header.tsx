@@ -8,7 +8,7 @@ import restartImg from "@/public/images/icon-restart.svg";
 import { useGame } from "../_context/GameContext";
 
 export default function Header() {
-  const { isxNext } = useGame();
+  const { isxNext, setShowRestart } = useGame();
   return (
     <div className="flex items-center justify-around mb-[68px] mt-[24px]">
       <div className="flex justify-center  gap-x-3 items-center">
@@ -23,7 +23,12 @@ export default function Header() {
         )}
         <p className="text-silver text-[14px] font-bold">TURN</p>
       </div>
-      <div className="bg-silver p-[12px] rounded-[5px] restart-shadow ">
+      <div
+        onClick={() => {
+          setShowRestart(true);
+        }}
+        className="bg-silver cursor-pointer p-[12px] rounded-[5px] restart-shadow "
+      >
         <Image
           src={restartImg}
           alt="icon resart"

@@ -23,6 +23,8 @@ function GameProvider({ children }: { children: ReactNode }) {
   const [winningLine, setWinningLine] = useState<number[]>([]);
   const [selectedMark, setSelectedMark] = useState<string>("X");
   const [multiPlayerMode, setMultiPlayerMode] = useState<boolean>(false);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [showRestart, setShowRestart] = useState<boolean>(false);
 
   const router = useRouter();
 
@@ -209,7 +211,6 @@ function GameProvider({ children }: { children: ReactNode }) {
     router.push("/");
     setWinningLine([]);
     setMultiPlayerMode(false);
-    console.log("Checking board Quit: ", board);
   };
 
   const nextRound = () => {
@@ -246,6 +247,18 @@ function GameProvider({ children }: { children: ReactNode }) {
     console.log("Checking board Nextround: ", board);
   };
 
+  const restartGame = () => {
+    setBoard(Array(9).fill(null));
+    setGameWinner("");
+    setIsxNext(true);
+    setTie(false);
+    setXwinCount(0);
+    setOwinCount(0);
+    setTieCount(0);
+    setWinningLine([]);
+    setShowRestart(false);
+  };
+
   return (
     <GameContext.Provider
       value={{
@@ -274,7 +287,12 @@ function GameProvider({ children }: { children: ReactNode }) {
         handleMarkSelection,
         multiPlayerMode,
         setMultiPlayerMode,
+        hoveredIndex,
+        setHoveredIndex,
         multiPlayerNextRound,
+        setShowRestart,
+        showRestart,
+        restartGame,
       }}
     >
       {children}
