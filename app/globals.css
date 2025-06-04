@@ -12,6 +12,9 @@
   --color-restart-shadow: #6b8997;
   --color-grey: #1a2a33;
   --color-overlay-bg: #00000054;
+
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 760px;
 }
 
 .shad {

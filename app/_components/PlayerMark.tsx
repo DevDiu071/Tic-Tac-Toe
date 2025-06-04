@@ -15,7 +15,7 @@ export default function PlayerMark() {
         PICK PLAYER 1&apos;S MARK
       </h1>
       <div className="flex justify-center">
-        <div className="grid grid-cols-2 px-2 gap-x-3 items-center mt-[24px] mb-[17px] h-[72px] rounded-[10px] bg-dark-navy w-[279px]">
+        <div className="grid grid-cols-2 px-2 gap-x-3 items-center mt-[24px] mb-[17px] h-[72px] rounded-[10px] bg-dark-navy w-[279px] md:mx-[24px] md:w-[412px]">
           <button
             className={clsx(
               "flex p-3 cursor-pointer rounded-[10px] items-center justify-center",

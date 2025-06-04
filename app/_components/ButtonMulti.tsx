@@ -10,7 +10,7 @@ export default function ButtonMulti() {
     <Link href="/multigamePage">
       <button
         onClick={() => setMultiPlayerMode(true)}
-        className="bg-light-blue cursor-pointer shadow-multi-btn pt-[14px] pb-[22px] mt-[16px] mb-[141px] font-bold w-full shadow-btn rounded-[15px]"
+        className="bg-light-blue cursor-pointer md:text-[20px] shadow-multi-btn pt-[14px] pb-[22px] mt-[16px] mb-[141px] font-bold w-full shadow-btn rounded-[15px]"
       >
         NEW GAME (VS PLAYER)
       </button>

@@ -1,5 +1,4 @@
 import React from "react";
-import GameBoard from "../_components/GameBoard";
 import Header from "../_components/Header";
 import Stats from "../_components/Stats";
 import WinScreen from "../_components/WinScreen";
