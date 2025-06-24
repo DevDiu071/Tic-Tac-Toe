@@ -31,18 +31,19 @@ function GameProvider({ children }: { children: ReactNode }) {
   useEffect(
     function () {
       const { winner, line } = calculateWinner(board);
-      console.log("test winner: ", line, gameWinner);
-      if (winner && winner !== gameWinner) {
+
+      if (winner) {
         setGameWinner(winner);
         setWinningLine(line);
-        console.log("LINESSSSSSSS: ", line);
+        console.log("LINESSSSSSSS: ", winningLine);
+        console.log("Winnnerr: ", winner);
       }
       const filteredBoards = board.filter((board) => board !== null);
       if (filteredBoards.length === 9 && !winner) {
         setTie(true);
       }
     },
-    [board]
+    [board] // Recalculate winner when board changes or gameWinner updates
   );
 
   // When player selects O, AI (X) makes the first move
@@ -150,7 +151,11 @@ function GameProvider({ children }: { children: ReactNode }) {
       newBoard[bestMove] = aiMark;
       setBoard(newBoard);
       const winner = calculateWinner(newBoard).winner;
-      if (winner) setGameWinner(winner);
+      if (winner) {
+        setGameWinner(winner);
+      } else {
+        setIsxNext(true); // Switch turn back to player
+      }
     }
   };
 
@@ -167,10 +172,17 @@ function GameProvider({ children }: { children: ReactNode }) {
     setBoard(newBoard);
 
     // Check if player won
-    const winner = calculateWinner(newBoard).winner;
+    const { winner, line } = calculateWinner(newBoard);
+    // const { winner, line } = calculateWinner(board);
     if (winner) {
       setGameWinner(winner);
+      setWinningLine(line);
+      console.log("Winner found: ", winner, line);
       return;
+    }
+
+    if (!gameWinner) {
+      setIsxNext(!isxNext);
     }
 
     // If no winner and game isn't over, trigger AI move
@@ -224,6 +236,7 @@ function GameProvider({ children }: { children: ReactNode }) {
     setGameWinner("");
     setTie(false);
     setWinningLine([]);
+    setIsxNext(true); // Reset to X's turn
 
     // If in solo mode and player is "O", AI ("X") makes the first move
     if (!multiPlayerMode && selectedMark === "O") {

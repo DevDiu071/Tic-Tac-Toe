@@ -384,7 +384,7 @@ function WinScreen() {
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                             onClick: quitGame,
-                            className: "text-[16px] font-bold h-[56px] w-[76px] rounded-[10px] bg-silver",
+                            className: "text-[16px] cursor-pointer font-bold h-[56px] w-[76px] rounded-[10px] bg-silver",
                             children: "QUIT"
                         }, void 0, false, {
                             fileName: "[project]/app/_components/WinScreen.tsx",
@@ -393,7 +393,7 @@ function WinScreen() {
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                             onClick: nextRound,
-                            className: "text-[16px] h-[56px] w-[146px] bg-light-yellow font-bold px-[17px] rounded-[10px]",
+                            className: "text-[16px] cursor-pointer h-[56px] w-[146px] bg-light-yellow font-bold px-[17px] rounded-[10px]",
                             children: "NEXT ROUND"
                         }, void 0, false, {
                             fileName: "[project]/app/_components/WinScreen.tsx",
@@ -519,36 +519,52 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$ico
 ;
 ;
 function SoloGameBoard() {
-    const { board, setHoveredIndex, hoveredIndex, handleSoloClick, winningLine, gameWinner } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$_context$2f$GameContext$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useGame"])();
+    const { board, setHoveredIndex, hoveredIndex, handleSoloClick, handleClick, winningLine, gameWinner } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$_context$2f$GameContext$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useGame"])();
     console.log(board);
+    console.log("Winner: ", gameWinner, "Winning Line: ", winningLine);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "grid grid-cols-3 max-w-[328px] md:max-w-[460px] mx-auto gap-[20px]",
         children: board.map((square, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                 onMouseEnter: ()=>setHoveredIndex(index),
                 onMouseLeave: ()=>setHoveredIndex(null),
                 onClick: ()=>handleSoloClick(index),
-                className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$clsx$2f$dist$2f$clsx$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"])(" rounded-[10px] shad cursor-pointer p-4 w-[96px] h-[96px] md:w-[140px] md:h-[140px] ", {
-                    "bg-light-yellow": gameWinner === "O" && winningLine.includes(index),
-                    "bg-light-blue": gameWinner === "X" && winningLine.includes(index),
-                    "bg-semi-dark-navy": !winningLine.includes(index)
-                }),
+                className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$clsx$2f$dist$2f$clsx$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"])("rounded-[10px] shad cursor-pointer md:w-[140px] md:h-[140px] p-4 w-[96px] h-[96px]", winningLine.includes(index) ? gameWinner === "X" ? "bg-light-blue shadow-multi-btn " : "bg-light-yellow shadow-btn" : "bg-semi-dark-navy"),
                 children: square === "X" ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: "flex items-center justify-center",
-                    children: hoveredIndex !== index ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                        src: __TURBOPACK__imported__module__$5b$project$5d2f$public$2f$images$2f$icon$2d$x$2e$svg$2e$mjs__$7b$__IMAGE__$3d3e$__$225b$project$5d2f$public$2f$images$2f$icon$2d$x$2e$svg__$28$static__in__ecmascript$2922$__$7d$__$5b$app$2d$ssr$5d$__$28$structured__image__object$2c$__ecmascript$29$__["default"],
-                        alt: "icon x",
-                        className: "w-[40px] h-[40px] md:w-[64px] md:h-[64px] "
+                    children: gameWinner === "X" && winningLine.includes(index) ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                        className: "w-[31px] h-[31px] md:w-[64px] md:h-[64px] ",
+                        viewBox: "0 0 64 64",
+                        xmlns: "http://www.w3.org/2000/svg",
+                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                            d: "M51.12 1.269c.511 0 1.023.195 1.414.586l9.611 9.611c.391.391.586.903.586 1.415s-.195 1.023-.586 1.414L44.441 32l17.704 17.705c.391.39.586.902.586 1.414 0 .512-.195 1.024-.586 1.415l-9.611 9.611c-.391.391-.903.586-1.415.586a1.994 1.994 0 0 1-1.414-.586L32 44.441 14.295 62.145c-.39.391-.902.586-1.414.586a1.994 1.994 0 0 1-1.415-.586l-9.611-9.611a1.994 1.994 0 0 1-.586-1.415c0-.512.195-1.023.586-1.414L19.559 32 1.855 14.295a1.994 1.994 0 0 1-.586-1.414c0-.512.195-1.024.586-1.415l9.611-9.611c.391-.391.903-.586 1.415-.586s1.023.195 1.414.586L32 19.559 49.705 1.855c.39-.391.902-.586 1.414-.586Z",
+                            className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$clsx$2f$dist$2f$clsx$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"])("", {
+                                "fill-grey": gameWinner === "X" && winningLine.includes(index),
+                                "fill-silver": gameWinner !== "X"
+                            })
+                        }, void 0, false, {
+                            fileName: "[project]/app/_components/SoloGameBoard.tsx",
+                            lineNumber: 49,
+                            columnNumber: 19
+                        }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/_components/SoloGameBoard.tsx",
                         lineNumber: 44,
                         columnNumber: 17
-                    }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                    }, this) : hoveredIndex === index ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                         src: __TURBOPACK__imported__module__$5b$project$5d2f$public$2f$images$2f$icon$2d$x$2d$outline$2e$svg$2e$mjs__$7b$__IMAGE__$3d3e$__$225b$project$5d2f$public$2f$images$2f$icon$2d$x$2d$outline$2e$svg__$28$static__in__ecmascript$2922$__$7d$__$5b$app$2d$ssr$5d$__$28$structured__image__object$2c$__ecmascript$29$__["default"],
                         alt: "icon x",
-                        className: "w-[40px] h-[40px] md:w-[64px] md:h-[64px] "
+                        className: "w-[40px] h-[40px] md:w-[64px] md:h-[64px]"
                     }, void 0, false, {
                         fileName: "[project]/app/_components/SoloGameBoard.tsx",
-                        lineNumber: 50,
+                        lineNumber: 59,
+                        columnNumber: 17
+                    }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                        src: __TURBOPACK__imported__module__$5b$project$5d2f$public$2f$images$2f$icon$2d$x$2e$svg$2e$mjs__$7b$__IMAGE__$3d3e$__$225b$project$5d2f$public$2f$images$2f$icon$2d$x$2e$svg__$28$static__in__ecmascript$2922$__$7d$__$5b$app$2d$ssr$5d$__$28$structured__image__object$2c$__ecmascript$29$__["default"],
+                        alt: "icon o",
+                        className: "w-[40px] h-[40px] md:w-[64px] md:h-[64px]"
+                    }, void 0, false, {
+                        fileName: "[project]/app/_components/SoloGameBoard.tsx",
+                        lineNumber: 65,
                         columnNumber: 17
                     }, this)
                 }, void 0, false, {
@@ -557,42 +573,42 @@ function SoloGameBoard() {
                     columnNumber: 13
                 }, this) : square === "O" ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$clsx$2f$dist$2f$clsx$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"])("flex items-center justify-center", {}),
-                    children: gameWinner !== "O" && hoveredIndex !== index ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                        src: __TURBOPACK__imported__module__$5b$project$5d2f$public$2f$images$2f$icon$2d$o$2e$svg$2e$mjs__$7b$__IMAGE__$3d3e$__$225b$project$5d2f$public$2f$images$2f$icon$2d$o$2e$svg__$28$static__in__ecmascript$2922$__$7d$__$5b$app$2d$ssr$5d$__$28$structured__image__object$2c$__ecmascript$29$__["default"],
-                        alt: "icon o",
-                        className: "w-[40px] h-[40px] md:w-[64px] md:h-[64px] "
+                    children: gameWinner === "O" && winningLine.includes(index) ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fa6$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["FaCircleDot"], {
+                        className: "text-[31px] text-grey md:text-[64px]"
                     }, void 0, false, {
                         fileName: "[project]/app/_components/SoloGameBoard.tsx",
-                        lineNumber: 60,
+                        lineNumber: 75,
                         columnNumber: 17
-                    }, this) : gameWinner === "O" && hoveredIndex !== index ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fa6$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["FaCircleDot"], {
-                        className: "text-[31px]"
-                    }, void 0, false, {
-                        fileName: "[project]/app/_components/SoloGameBoard.tsx",
-                        lineNumber: 66,
-                        columnNumber: 17
-                    }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                    }, this) : hoveredIndex === index ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                         src: __TURBOPACK__imported__module__$5b$project$5d2f$public$2f$images$2f$icon$2d$o$2d$outline$2e$svg$2e$mjs__$7b$__IMAGE__$3d3e$__$225b$project$5d2f$public$2f$images$2f$icon$2d$o$2d$outline$2e$svg__$28$static__in__ecmascript$2922$__$7d$__$5b$app$2d$ssr$5d$__$28$structured__image__object$2c$__ecmascript$29$__["default"],
                         alt: "icon x",
-                        className: "w-[40px] h-[40px] md:w-[64px] md:h-[64px] "
+                        className: "w-[40px] h-[40px] md:w-[64px] md:h-[64px]"
                     }, void 0, false, {
                         fileName: "[project]/app/_components/SoloGameBoard.tsx",
-                        lineNumber: 68,
+                        lineNumber: 77,
+                        columnNumber: 17
+                    }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                        src: __TURBOPACK__imported__module__$5b$project$5d2f$public$2f$images$2f$icon$2d$o$2e$svg$2e$mjs__$7b$__IMAGE__$3d3e$__$225b$project$5d2f$public$2f$images$2f$icon$2d$o$2e$svg__$28$static__in__ecmascript$2922$__$7d$__$5b$app$2d$ssr$5d$__$28$structured__image__object$2c$__ecmascript$29$__["default"],
+                        alt: "icon o",
+                        className: "w-[40px] h-[40px] md:w-[64px] md:h-[64px]"
+                    }, void 0, false, {
+                        fileName: "[project]/app/_components/SoloGameBoard.tsx",
+                        lineNumber: 83,
                         columnNumber: 17
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/app/_components/SoloGameBoard.tsx",
-                    lineNumber: 58,
+                    lineNumber: 73,
                     columnNumber: 13
                 }, this) : null
             }, index, false, {
                 fileName: "[project]/app/_components/SoloGameBoard.tsx",
-                lineNumber: 25,
+                lineNumber: 27,
                 columnNumber: 9
             }, this))
     }, void 0, false, {
         fileName: "[project]/app/_components/SoloGameBoard.tsx",
-        lineNumber: 23,
+        lineNumber: 25,
         columnNumber: 5
     }, this);
 }

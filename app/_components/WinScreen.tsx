@@ -39,13 +39,13 @@ export default function WinScreen() {
         <div className="flex items-center gap-x-[16px]">
           <button
             onClick={quitGame}
-            className="text-[16px] font-bold h-[56px] w-[76px] rounded-[10px] bg-silver"
+            className="text-[16px] cursor-pointer font-bold h-[56px] w-[76px] rounded-[10px] bg-silver"
           >
             QUIT
           </button>
           <button
             onClick={nextRound}
-            className="text-[16px] h-[56px] w-[146px] bg-light-yellow font-bold px-[17px] rounded-[10px]"
+            className="text-[16px] cursor-pointer h-[56px] w-[146px] bg-light-yellow font-bold px-[17px] rounded-[10px]"
           >
             NEXT ROUND
           </button>

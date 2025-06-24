@@ -36,11 +36,11 @@ function GameProvider({ children }) {
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "GameProvider.useEffect": function() {
             const { winner, line } = calculateWinner(board);
-            console.log("test winner: ", line, gameWinner);
-            if (winner && winner !== gameWinner) {
+            if (winner) {
                 setGameWinner(winner);
                 setWinningLine(line);
-                console.log("LINESSSSSSSS: ", line);
+                console.log("LINESSSSSSSS: ", winningLine);
+                console.log("Winnnerr: ", winner);
             }
             const filteredBoards = board.filter({
                 "GameProvider.useEffect.filteredBoards": (board)=>board !== null
@@ -51,7 +51,8 @@ function GameProvider({ children }) {
         }
     }["GameProvider.useEffect"], [
         board
-    ]);
+    ] // Recalculate winner when board changes or gameWinner updates
+    );
     // When player selects O, AI (X) makes the first move
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "GameProvider.useEffect": ()=>{
@@ -151,7 +152,11 @@ function GameProvider({ children }) {
             newBoard[bestMove] = aiMark;
             setBoard(newBoard);
             const winner = calculateWinner(newBoard).winner;
-            if (winner) setGameWinner(winner);
+            if (winner) {
+                setGameWinner(winner);
+            } else {
+                setIsxNext(true); // Switch turn back to player
+            }
         }
     };
     const handleSoloClick = (index)=>{
@@ -166,10 +171,16 @@ function GameProvider({ children }) {
         newBoard[index] = selectedMark;
         setBoard(newBoard);
         // Check if player won
-        const winner = calculateWinner(newBoard).winner;
+        const { winner, line } = calculateWinner(newBoard);
+        // const { winner, line } = calculateWinner(board);
         if (winner) {
             setGameWinner(winner);
+            setWinningLine(line);
+            console.log("Winner found: ", winner, line);
             return;
+        }
+        if (!gameWinner) {
+            setIsxNext(!isxNext);
         }
         // If no winner and game isn't over, trigger AI move
         if (!isBoardFull(newBoard)) {
@@ -255,6 +266,7 @@ function GameProvider({ children }) {
         setGameWinner("");
         setTie(false);
         setWinningLine([]);
+        setIsxNext(true); // Reset to X's turn
         // If in solo mode and player is "O", AI ("X") makes the first move
         if (!multiPlayerMode && selectedMark === "O") {
             setTimeout(()=>makeAIMove(Array(9).fill(null)), 500);
@@ -323,7 +335,7 @@ function GameProvider({ children }) {
         children: children
     }, void 0, false, {
         fileName: "[project]/app/_context/GameContext.tsx",
-        lineNumber: 263,
+        lineNumber: 276,
         columnNumber: 5
     }, this);
 }
