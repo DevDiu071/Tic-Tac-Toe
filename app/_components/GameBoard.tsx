@@ -1,4 +1,5 @@
 "use client";
+import { motion } from "framer-motion";
 
 import { useGame } from "../_context/GameContext";
 import Image from "next/image";
@@ -45,7 +46,7 @@ export default function GameBoard() {
                 <Image
                   src={xOutline}
                   alt="icon x"
-                  className="w-[40px] h-[40px] md:w-[64px] md:h-[64px]"
+                  className="w-[40px] transition h-[40px] md:w-[64px] md:h-[64px]"
                 />
               ) : gameWinner === "X" && winningLine.includes(index) ? (
                 <svg
@@ -65,25 +66,25 @@ export default function GameBoard() {
                 <Image
                   src={xImg}
                   alt="icon x"
-                  className="w-[40px] h-[40px] md:w-[64px] md:h-[64px]"
+                  className="w-[40px] transition h-[40px] md:w-[64px] md:h-[64px]"
                 />
               )}
             </div>
           ) : square === "O" ? (
             <div className={clsx("flex items-center justify-center", {})}>
               {gameWinner === "O" && winningLine.includes(index) ? (
-                <FaCircleDot className="text-[31px] text-grey md:text-[64px]" />
+                <FaCircleDot className="text-[31px] transition text-grey md:text-[64px]" />
               ) : hoveredIndex === index ? (
                 <Image
                   src={oOutline}
                   alt="icon x"
-                  className="w-[40px] h-[40px] md:w-[64px] md:h-[64px]"
+                  className="w-[40px] transition h-[40px] md:w-[64px] md:h-[64px]"
                 />
               ) : (
                 <Image
                   src={oImg}
                   alt="icon o"
-                  className="w-[40px] h-[40px] md:w-[64px] md:h-[64px]"
+                  className="w-[40px] transition h-[40px] md:w-[64px] md:h-[64px]"
                 />
               )}
 

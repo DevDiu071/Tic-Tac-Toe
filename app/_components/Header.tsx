@@ -1,4 +1,5 @@
 "use client";
+import { motion } from "framer-motion";
 
 import React from "react";
 import Image from "next/image";
@@ -17,17 +18,31 @@ export default function Header() {
       </div>
       <div className=" gap-x-[9px] shadow-md flex justify-center md:gap-x-[13px] items-center rounded-[5px] md:rounded-[10px] md:w-[130px] md:h-[52px] bg-semi-dark-navy px-[15px] pt-[9px] pb-[13px]">
         {isxNext ? (
-          <Image
-            src={xImg}
-            alt="icon x"
-            className="w-[16px] h-[16px] md:w-[22px] md:h-[22px] "
-          />
+          <motion.div
+            key="x"
+            initial={{ scale: 0 }}
+            animate={{ scale: [0.5, 1.7, 1] }}
+            transition={{ duration: 0.3, times: [0, 0.5, 1] }}
+          >
+            <Image
+              src={xImg}
+              alt="icon x"
+              className="w-[16px] h-[16px] md:w-[22px] md:h-[22px] "
+            />
+          </motion.div>
         ) : (
-          <Image
-            src={oImg}
-            alt="icon x"
-            className="w-[16px] h-[16px] md:w-[22px] md:h-[22px]"
-          />
+          <motion.div
+            key="o"
+            initial={{ scale: 0 }}
+            animate={{ scale: [0.5, 1.7, 1] }}
+            transition={{ duration: 0.3, times: [0, 0.5, 1] }}
+          >
+            <Image
+              src={oImg}
+              alt="icon x"
+              className="w-[16px] h-[16px] md:w-[22px] md:h-[22px]"
+            />
+          </motion.div>
         )}
         <p className="text-silver text-[14px] font-bold">TURN</p>
       </div>
