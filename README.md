@@ -34,8 +34,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: [Solution](https://www.frontendmentor.io/solutions/responsive-and-acessible-tic-tac-toe-built-with-nextjs-and-framer-motion-gbWNNcYDcw)
+- Live Site URL: [Tic-Tac-Toe](https://tic-tac-toe-diu.vercel.app/)
 
 ## My process
 
