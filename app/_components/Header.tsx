@@ -48,8 +48,14 @@ export default function Header() {
       </div>
 
       <div
-        onClick={() => {
-          setShowRestart(true);
+        tabIndex={0}
+        role="button"
+        aria-label="Restart"
+        onClick={() => setShowRestart(true)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            setShowRestart(true);
+          }
         }}
         className="bg-silver flex justify-center items-center cursor-pointer p-[5px] w-[40px] h-[40px] md:w-[52px] md:h-[52px] rounded-[10px] restart-shadow "
       >
