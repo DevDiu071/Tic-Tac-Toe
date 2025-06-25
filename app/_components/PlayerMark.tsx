@@ -9,12 +9,7 @@ import { useGame } from "../_context/GameContext";
 export default function PlayerMark() {
   const { selectedMark, handleMarkSelection } = useGame();
   return (
-    <motion.div
-      initial={{ y: -50, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.4, ease: "easeIn" }}
-      className="bg-semi-dark-navy mt-[32px] shad pt-[24px] rounded-[15px]"
-    >
+    <div className="bg-semi-dark-navy mt-[32px] shad pt-[24px] rounded-[15px]">
       <h1 className="text-silver font-bold text-[16px] text-center">
         PICK PLAYER 1&apos;S MARK
       </h1>
@@ -65,6 +60,6 @@ export default function PlayerMark() {
       <p className="text-[14px] font-semibold pb-[30px] text-silver text-center">
         REMEMBER: X GOES FIRST
       </p>
-    </motion.div>
+    </div>
   );
 }
