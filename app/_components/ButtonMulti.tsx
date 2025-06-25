@@ -14,6 +14,9 @@ export default function ButtonMulti() {
           backgroundColor: "#65E9E4",
           transition: { duration: 0.2 },
         }}
+        initial={{ x: 100, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.4, ease: "easeIn" }}
         onClick={() => setMultiPlayerMode(true)}
         className="bg-light-blue cursor-pointer md:text-[20px] shadow-multi-btn pt-[14px] pb-[22px] mt-[16px] mb-[141px] font-bold w-full shadow-btn rounded-[15px]"
       >
