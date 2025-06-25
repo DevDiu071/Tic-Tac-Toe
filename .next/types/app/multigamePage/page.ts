@@ -1,4 +1,4 @@
-// File: C:\Users\a\Desktop\Nextjs\inprogress\tic-tac-toe\app\multigamePage\page.tsx
+// File: /home/diu/Desktop/Nextjs-Projects/Tic-Tac-Toe/app/multigamePage/page.tsx
 import * as entry from '../../../../app/multigamePage/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

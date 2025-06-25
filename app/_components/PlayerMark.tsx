@@ -2,8 +2,6 @@
 import { motion } from "framer-motion";
 
 import React from "react";
-import Image from "next/image";
-import xImg from "@/public/images/icon-x.svg";
 import { FaCircleDot } from "react-icons/fa6";
 import clsx from "clsx";
 import { useGame } from "../_context/GameContext";

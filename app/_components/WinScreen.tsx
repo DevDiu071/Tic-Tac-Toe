@@ -13,7 +13,7 @@ export default function WinScreen() {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1, transition: { duration: 0.4 } }}
-      className="absolute z-30 pb-[40px] h-[228px] w-full top-[220px] bottom-[220px] bg-semi-dark-navy transform"
+      className="absolute z-30 pb-[40px] h-[228px] sm:h-[266px] w-full top-[220px] bottom-[220px] flex flex-col justify-center bg-semi-dark-navy transform"
     >
       <div className="flex flex-col justify-center items-center">
         {!tie && gameWinner === selectedMark && (

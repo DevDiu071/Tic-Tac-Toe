@@ -35,8 +35,6 @@ function GameProvider({ children }: { children: ReactNode }) {
       if (winner) {
         setGameWinner(winner);
         setWinningLine(line);
-        console.log("LINESSSSSSSS: ", winningLine);
-        console.log("Winnnerr: ", winner);
       }
       const filteredBoards = board.filter((board) => board !== null);
       if (filteredBoards.length === 9 && !winner) {
@@ -56,7 +54,7 @@ function GameProvider({ children }: { children: ReactNode }) {
     ) {
       setTimeout(() => makeAIMove([...board]), 500);
     }
-  }, [selectedMark, board, multiPlayerMode]); // Trigger when selectedMark changes or board resets
+  }, [selectedMark, board, gameWinner, multiPlayerMode]); // Trigger when selectedMark changes or board resets
 
   const handleClick = (index: number) => {
     if (board[index] || calculateWinner(board).winner) return;
@@ -74,11 +72,7 @@ function GameProvider({ children }: { children: ReactNode }) {
     setBoard(Array(9).fill(null)); // Reset board
     setGameWinner(""); // Clear winner
     setIsxNext(true); // Ensure X goes first
-
-    // If player selects O, AI (X) makes the first move
-    if (mark === "O" && !multiPlayerMode) {
-      setTimeout(() => makeAIMove(Array(9).fill(null)), 500);
-    }
+    setMultiPlayerMode(true);
   };
 
   ///////////// AI LOGIC
@@ -154,7 +148,7 @@ function GameProvider({ children }: { children: ReactNode }) {
       if (winner) {
         setGameWinner(winner);
       } else {
-        setIsxNext(true); // Switch turn back to player
+        setIsxNext((next) => !next); // Switch turn back to player
       }
     }
   };
@@ -177,7 +171,7 @@ function GameProvider({ children }: { children: ReactNode }) {
     if (winner) {
       setGameWinner(winner);
       setWinningLine(line);
-      console.log("Winner found: ", winner, line);
+
       return;
     }
 
@@ -223,6 +217,7 @@ function GameProvider({ children }: { children: ReactNode }) {
     router.push("/");
     setWinningLine([]);
     setMultiPlayerMode(false);
+    setSelectedMark("X"); // Reset selected mark to default
   };
 
   const nextRound = () => {
@@ -257,7 +252,6 @@ function GameProvider({ children }: { children: ReactNode }) {
     setIsxNext(true);
     setTie(false);
     setWinningLine([]);
-    console.log("Checking board Nextround: ", board);
   };
 
   const restartGame = () => {
@@ -306,6 +300,7 @@ function GameProvider({ children }: { children: ReactNode }) {
         setShowRestart,
         showRestart,
         restartGame,
+        makeAIMove,
       }}
     >
       {children}

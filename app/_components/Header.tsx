@@ -11,12 +11,12 @@ import { useGame } from "../_context/GameContext";
 export default function Header() {
   const { isxNext, setShowRestart } = useGame();
   return (
-    <div className="flex items-center justify-between max-w-[460px] mx-auto md:mt-[139px] md:mb-[20px] mt-[24px]">
-      <div className="flex justify-center   gap-x-3 items-center">
+    <div className="flex items-center justify-center sm:justify-between gap-x-[60px] max-w-[460px] sm:mx-auto mx-auto md:mt-[139px] md:mb-[20px] mt-[24px]">
+      <div className="flex justify-center gap-x-3 items-center">
         <Image src={xImg} alt="icon x" className="w-[32px] h-[32px]" />
         <Image src={oImg} alt="icon o" className="w-[31px] h-[31px]" />
       </div>
-      <div className=" gap-x-[9px] shadow-md flex justify-center md:gap-x-[13px] items-center rounded-[5px] md:rounded-[10px] md:w-[130px] md:h-[52px] bg-semi-dark-navy px-[15px] pt-[9px] pb-[13px]">
+      <div className="gap-x-[9px] shadow-md flex justify-center md:gap-x-[13px] w-[100px] items-center rounded-[5px] md:rounded-[10px] md:w-[130px] md:h-[52px] bg-semi-dark-navy px-[15px] pt-[9px] pb-[13px]">
         {isxNext ? (
           <motion.div
             key="x"

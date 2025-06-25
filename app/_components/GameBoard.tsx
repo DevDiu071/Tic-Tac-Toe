@@ -1,5 +1,4 @@
 "use client";
-import { motion } from "framer-motion";
 
 import { useGame } from "../_context/GameContext";
 import Image from "next/image";
@@ -11,20 +10,18 @@ import clsx from "clsx";
 import { FaCircleDot } from "react-icons/fa6";
 
 export default function GameBoard() {
-  console.log("GameBoard Rendered");
   const {
     board,
     handleClick,
     hoveredIndex,
     setHoveredIndex,
     winningLine,
-    selectedMark,
+
     gameWinner,
   } = useGame();
-  console.log("LINEEEEEE: ", winningLine);
-  console.log("Winning Line: ", winningLine), "Winner: ", gameWinner;
+
   return (
-    <div className="grid grid-cols-3 max-w-[328px] md:max-w-[460px] mx-auto gap-[20px]">
+    <div className="grid grid-cols-3 max-w-[328px] md:max-w-[460px]  mt-[64px] mx-auto gap-[20px]">
       {board.map((square, index) => (
         <button
           onMouseEnter={() => setHoveredIndex(index)}

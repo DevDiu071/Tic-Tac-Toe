@@ -16,6 +16,7 @@ export interface GameContextType {
   handleMarkSelection: (mark: "X" | "O") => void;
   multiPlayerNextRound: () => void;
   restartGame: () => void;
+  makeAIMove: (board: (string | null)[]) => void;
   xWinCount: number;
   oWinCount: number;
   tieCount: number;

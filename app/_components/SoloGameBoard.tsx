@@ -15,14 +15,12 @@ export default function SoloGameBoard() {
     setHoveredIndex,
     hoveredIndex,
     handleSoloClick,
-    handleClick,
     winningLine,
     gameWinner,
   } = useGame();
-  console.log(board);
-  console.log("Winner: ", gameWinner, "Winning Line: ", winningLine);
+
   return (
-    <div className="grid grid-cols-3 max-w-[328px] md:max-w-[460px] mx-auto gap-[20px]">
+    <div className="grid grid-cols-3 max-w-[328px] mt-[64px] md:max-w-[460px] mx-auto gap-[20px]">
       {board.map((square, index) => (
         <button
           onMouseEnter={() => setHoveredIndex(index)}
@@ -42,7 +40,7 @@ export default function SoloGameBoard() {
             <div className="flex items-center justify-center">
               {gameWinner === "X" && winningLine.includes(index) ? (
                 <svg
-                  className="w-[31px] h-[31px] md:w-[64px] md:h-[64px] "
+                  className="w-[40px] h-[40px] md:w-[64px] md:h-[64px] "
                   viewBox="0 0 64 64"
                   xmlns="http://www.w3.org/2000/svg"
                 >
@@ -72,7 +70,7 @@ export default function SoloGameBoard() {
           ) : square === "O" ? (
             <div className={clsx("flex items-center justify-center", {})}>
               {gameWinner === "O" && winningLine.includes(index) ? (
-                <FaCircleDot className="text-[31px] text-grey md:text-[64px]" />
+                <FaCircleDot className="text-[40px] text-grey md:text-[64px]" />
               ) : hoveredIndex === index ? (
                 <Image
                   src={oOutline}
@@ -86,8 +84,6 @@ export default function SoloGameBoard() {
                   className="w-[40px] h-[40px] md:w-[64px] md:h-[64px]"
                 />
               )}
-
-              {/* {gameWinner === "O" && <FaCircleDot className="text-[31px]" />} */}
             </div>
           ) : null}
         </button>
