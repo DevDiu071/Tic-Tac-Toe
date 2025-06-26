@@ -59,6 +59,7 @@ export default function WinScreen() {
         )}
         <div className="flex items-center gap-x-[16px]">
           <motion.button
+            type="button"
             initial={{ x: -100, opacity: 0 }}
             animate={{
               x: 0,
@@ -75,6 +76,7 @@ export default function WinScreen() {
             QUIT
           </motion.button>
           <motion.button
+            type="button"
             initial={{ x: 100, opacity: 0 }}
             animate={{
               x: 0,

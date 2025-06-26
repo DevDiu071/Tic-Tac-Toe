@@ -9,7 +9,8 @@ export default function ButtonMulti() {
   const { setMultiPlayerMode } = useGame();
   return (
     <Link href="/multigamePage">
-      <motion.button
+      <motion.div
+        aria-label="New Game (VS Player)"
         whileHover={{
           backgroundColor: "#65E9E4",
           transition: { duration: 0.2 },
@@ -21,7 +22,7 @@ export default function ButtonMulti() {
         className="bg-light-blue cursor-pointer md:text-[20px] shadow-multi-btn pt-[14px] pb-[22px] mt-[16px] mb-[141px] font-bold w-full shadow-btn rounded-[15px]"
       >
         NEW GAME (VS PLAYER)
-      </motion.button>
+      </motion.div>
     </Link>
   );
 }

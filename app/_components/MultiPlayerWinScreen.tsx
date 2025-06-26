@@ -68,6 +68,7 @@ export default function MultiPlayerWinScreen() {
         )}
         <div className="flex items-center gap-x-[16px]">
           <motion.button
+            type="button"
             initial={{ x: -100, opacity: 0 }}
             animate={{
               x: 0,
@@ -84,6 +85,7 @@ export default function MultiPlayerWinScreen() {
             QUIT
           </motion.button>
           <motion.button
+            type="button"
             initial={{ x: 100, opacity: 0 }}
             animate={{
               x: 0,

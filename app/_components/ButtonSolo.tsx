@@ -20,7 +20,8 @@ export default function ButtonSolo() {
   // Add any additional logic needed when the button is clicked
   return (
     <Link href="/sologamePage">
-      <motion.button
+      <motion.div
+        aria-label="New Game (VS CPU)"
         whileHover={{
           backgroundColor: "#ffc860",
           transition: { duration: 0.2 },
@@ -32,7 +33,7 @@ export default function ButtonSolo() {
         className="bg-light-yellow cursor-pointer pt-[14px] md:text-[20px] pb-[22px] mt-[32px] font-bold w-full shadow-btn rounded-[15px]"
       >
         NEW GAME (VS CPU)
-      </motion.button>
+      </motion.div>
     </Link>
   );
 }
