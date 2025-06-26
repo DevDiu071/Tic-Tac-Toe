@@ -21,6 +21,7 @@ export default function PlayerMark() {
       <div className="flex justify-center">
         <div className="grid grid-cols-2 px-2 gap-x-3 items-center mt-[24px] mb-[17px] h-[72px] rounded-[10px] bg-dark-navy w-[279px] md:mx-[24px] md:w-[412px]">
           <button
+            type="button"
             aria-label="Select X mark"
             className={clsx(
               "flex p-3 cursor-pointer transition-colors duration-200 rounded-[10px] items-center justify-center",
@@ -46,6 +47,7 @@ export default function PlayerMark() {
             </svg>
           </button>
           <button
+            type="button"
             aria-label="Select O mark"
             onClick={() => handleMarkSelection("O")}
             className={clsx(

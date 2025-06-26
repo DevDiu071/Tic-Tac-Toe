@@ -10,7 +10,6 @@ export default function ButtonMulti() {
   return (
     <Link href="/multigamePage">
       <motion.div
-        aria-label="New Game (VS Player)"
         whileHover={{
           backgroundColor: "#65E9E4",
           transition: { duration: 0.2 },

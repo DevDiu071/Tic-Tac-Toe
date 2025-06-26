@@ -21,7 +21,6 @@ export default function ButtonSolo() {
   return (
     <Link href="/sologamePage">
       <motion.div
-        aria-label="New Game (VS CPU)"
         whileHover={{
           backgroundColor: "#ffc860",
           transition: { duration: 0.2 },
